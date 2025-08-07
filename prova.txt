@@ -1,0 +1,138 @@
+
+
+Create database Hotel;
+Use Hotel;
+
+Create table Quartos ( 
+	Id_Quartos INT Not Null Primary Key,
+	Numero text,
+	Capacidade INT,
+	Vista_Mar Boolean,
+	Diaria decimal);
+
+Create table Clientes (
+	Id_Clientes INT Not null Primary Key,
+	Nome text,
+	Email text,
+	Telefone text,
+	Tabela text);
+
+Create table Reservas (
+	Id_Reservas INT Not Null Primary key,
+ 	FOREIGN KEY (id_cliente) REFERENCES clientes(Id_Clientes),
+	FOREIGN KEY (id_quarto) REFERENCES quartos(Id_Quartos),
+	Data_Entrada data,
+	Data-Saida data );
+
+--questao2
+
+Insert into Quartos ( Id_Quartos, Numero, Capacidade, Vista_Mar, Diaria)  Values
+	( 1,'Quarto 1', 1, 'false', 150.00),
+	( 2, 'Quarto 2', 5, 'true', 750.00),
+	( 3, 'Quarto 3', 3, 'true', 450.00),
+	( 4, 'Quarto 4', 1, 'false', 150.00),
+	( 5, 'Quarto 5', 2, 'false', 300.00);
+
+Insert into Clientes ( Id_Clientes, Nome, Email, Telefone) Values
+	( 1, 'Miguel', 'miguel@teste.com', '(46)9 2520-3616'),
+	( 2, 'Alice', 'alice@teste.com', '(46)9 3582-3775'),
+	( 3, 'Davi', 'davi@teste.com', '(46)9 2232-1677'),
+	( 4, 'Julia', 'julia@teste.com', '(46)9 3712-5526'),
+	( 5, 'Bruna', 'bruna@teste.com', '(46)9 2515-0737');
+
+Insert into Reservas (Id, Id_Clientes, Id_Quartos, Data_Entrada, Data_Saida) values 
+	( 1, 3, 1, '2023-05-01', '2023-05-02'),
+	( 2, 5, 2, '2023-05-06', '2023-05-07),
+	( 3, 2, 3, '2023-04-14', '2023-04-25),
+	( 4, 1, 4, '2023-01-01', '2023-01-05),
+	( 5, 3, 5, '2023-02-20', '2023-02-24);
+
+--questao3
+
+select * 
+from Quartos 
+Where Vista_Mar = "true";
+
+
+
+select * from Clientes
+Where Nome or Email;
+
+
+
+Select * from Quartos 
+Where Capacidade = "2",
+
+
+
+select * from Clientes 
+Where Nome like "B%";
+
+
+
+select * from Reservas
+Where data_checkin between "2023-05-01" and "2023-05-31";
+
+--Questao4
+
+select * from Quartos;
+
+select * from Quartos
+where Capacidade <=1;
+
+select * from quartos
+where Capacidade >=5;
+
+select * from quartos
+where Capacidade;
+
+select * from quartos
+where Capacidade and Vista_Mar;
+
+--questao5
+
+select 
+	diaria as descrescent 
+from Quartos 
+	where diaria;
+
+select 
+	diaria as crescent 
+from Quartos;
+	where diaria;
+
+--questao6
+
+alter table
+	 reservas 
+add 
+	cumpom varchar(5);
+
+
+Update reservas (Id, Cupom) values
+	( 1, 'LGTSP'),
+	( 2, 'XGTSP'),
+	( 4, 'GTSQL');
+
+--questao7
+
+SELECT * FROM reservas LEFT JOIN quartos;
+
+
+--questao8
+
+select 
+*
+FROM reservas
+	JOIN reservas ON Id_Quartos = id_clientes;
+
+--questao9
+
+DELETE FROM reservas WHERE id = ('4','3');
+
+--questao10
+
+drop table reservas;
+drop table clientes;
+drop tables quartos;
+drop database hotel ;
